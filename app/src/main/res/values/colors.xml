@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#353232</color>
+    <color name="colorAccent">#2B2B2B</color>
+    <color name="date_design_btn_end">#A8A4A4</color>
+    <color name="back_color">#353232</color>
+    <color name="back_color_1">#4D1E1E</color>
+    <color name="color_text_welcome">#8A8685</color>
+    <color name="white">#FFFFFF</color>
+    <color name="hint_color">#C5A1A1</color>
+    <color name="orange">#FF6E40</color>
+    <color name="black">#000000</color>
+    <color name="toolbar_color">#CCC7C7</color>
+    <color name="update_profile_text_color">#5F2020</color>
+
+
+    <!--    color for intensities-->
+    <color name="low">#50B825</color>
+    <color name="medium">#2847D8</color>
+    <color name="high">#FFC107</color>
+    <color name="very_high">#F81400</color>
+
+
+</resources>

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Forest Fire</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--API-KEY for Address-->
+    <string name="api_key">AIzaSyDUttA5xDk2MZrdBqrTV9BNdlbYeBH02PA</string>
+    <string name="low">LOW</string>
+    <string name="med">MEDIUM</string>
+    <string name="hig">HIGH</string>
+    <string name="vhigh">VERY-HIGH</string>
+
+
+    <!--    AutoComplete values-->
+    <string-array name="states">
+        <item>Maharashtra</item>
+        <item>punjab</item>
+        <item>Uttar Pradesh</item>
+        <item>Rajasthan</item>
+    </string-array>
+
+</resources>
