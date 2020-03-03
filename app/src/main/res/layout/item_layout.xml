@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="10dp"
     android:elevation="10dp"
+    app:cardBackgroundColor="#E1F5FE"
     android:orientation="vertical"
     app:cardElevation="10dp">
 
@@ -16,9 +17,8 @@
         <TextView
             android:id="@+id/date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight="7"
             android:background="@drawable/date_design"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -28,8 +28,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:gravity="left"
+            android:layout_gravity="start"
+            android:gravity="start"
             android:orientation="horizontal">
 
             <TextView
@@ -41,20 +41,28 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="22 degree celcius"
+                android:text="22"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" ° C"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
         </LinearLayout>
 
-        <View style="@style/proifleDetailsView" />
+        <View style="@style/profileDetailsView" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:gravity="left"
+            android:layout_gravity="start"
+            android:gravity="start"
             android:orientation="horizontal">
 
             <TextView
@@ -66,20 +74,28 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/humidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="18%"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
         </LinearLayout>
 
-        <View style="@style/proifleDetailsView" />
+        <View style="@style/profileDetailsView" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:gravity="left"
+            android:layout_gravity="start"
+            android:gravity="start"
             android:orientation="horizontal">
 
             <TextView
@@ -91,20 +107,28 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/soil_moist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="990"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="% h2o/w"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
         </LinearLayout>
 
-        <View style="@style/proifleDetailsView" />
+        <View style="@style/profileDetailsView" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:gravity="left"
+            android:layout_gravity="start"
+            android:gravity="start"
             android:orientation="horizontal">
 
             <TextView
@@ -116,20 +140,28 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/atm"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="101300 pa"
+                android:text="101300"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text=" pa"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
         </LinearLayout>
 
-        <View style="@style/proifleDetailsView" />
+        <View style="@style/profileDetailsView" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:gravity="left"
+            android:layout_gravity="start"
+            android:gravity="start"
             android:orientation="horizontal">
 
             <TextView
@@ -141,44 +173,54 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/alt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="49 feet"
+                android:text="49"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="feet"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
         </LinearLayout>
 
-        <View style="@style/proifleDetailsView" />
+        <View style="@style/profileDetailsView" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:background="#50B825"
-            android:orientation="vertical">
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:weightSum="2">
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/results"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Intensity"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="Intensity--->"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/intensity"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:gravity="center"
-                android:text="HIGH"
+                android:layout_weight="1"
+                android:text="high"
+                android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:textSize="25sp"
+                android:textSize="32sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
-
-
 </androidx.cardview.widget.CardView>

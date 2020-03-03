@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
@@ -15,10 +16,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class AlertsActivity extends AppCompatActivity {
 
     MyHelper helper;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,22 +30,47 @@ public class AlertsActivity extends AppCompatActivity {
 
         helper = new MyHelper(this);
         final SQLiteDatabase database = helper.getReadableDatabase();
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                helper.insertData(33, 22, 22, 22, 22, "low", 22, database);
-            }
-        });
-        HomeFrag homeFrag = new HomeFrag();
-        int i = homeFrag.intensity;
 
+        Cursor cursor = database.rawQuery("SELECT " + MyHelper.COLUMN_D_T + ", " + MyHelper.COLUMN_TEMP + ", " +
+                MyHelper.COLUMN_HUMIDITY + ", " + MyHelper.COLUMN_SM + ", " + MyHelper.COLUMN_ATM_P + ", " +
+                MyHelper.COLUMN_ALT + ", " + MyHelper.COLUMN_INTENSITY_RES + " FROM past_alerts", new String[]{});
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        do {
+            assert cursor != null;
+            String date = cursor.getString(1);
+            Double temp = cursor.getDouble(2);
+            Double humidity = cursor.getDouble(3);
+            Double moist = cursor.getDouble(4);
+            Double pressure = cursor.getDouble(5);
+            Double alt = cursor.getDouble(6);
+            Double result = cursor.getDouble(7);
+
+        } while (cursor.moveToNext());
+
+
+//        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                helper.insertData(33, 22, 22, 22, 22, "low", 22, database);
+//            }
+//        });
+
+//        recyclerView = findViewById(R.id.logs_recycler);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+//        layoutManager.setStackFromEnd(true);
+//        layoutManager.setReverseLayout(true);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(layoutManager);
+//        HomeFrag homeFrag = new HomeFrag();
+//        int i = homeFrag.intensity;
 
 //        if(i<30){
 //            inboxStyleNotification();
 //        }
-
     }
-
 //    public void simpleNotification(View view) {
 //        /**Id for Notification**/
 //        final String channelId = "Channel 1";
@@ -116,7 +144,6 @@ public class AlertsActivity extends AppCompatActivity {
 //            mNotificationManager.notify(1, builder.build());
 //        }
 //    }
-
     public void inboxStyleNotification(View view) {
         final String channelId = "Channel 1";
 

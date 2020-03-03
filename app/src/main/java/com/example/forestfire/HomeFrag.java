@@ -1,6 +1,7 @@
 package com.example.forestfire;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,7 +20,6 @@ import java.util.Locale;
 
 public class HomeFrag extends Fragment {
 
-    int intensity = 28;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Nullable
@@ -29,6 +29,13 @@ public class HomeFrag extends Fragment {
 
         TextView intensity_result = v.findViewById(R.id.intensity);
         final TextView dateTime = v.findViewById(R.id.dateAndTime);
+        TextView alertsOpen = v.findViewById(R.id.open_alerts);
+        alertsOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AlertsActivity.class));
+            }
+        });
 
         SimpleDateFormat sdf = new SimpleDateFormat("*yyyy-MM-dd hh:mm a", Locale.getDefault());
         String currentDateAndTime = sdf.format(new Date());
@@ -40,7 +47,7 @@ public class HomeFrag extends Fragment {
             public void run() {
                 while (!isInterrupted()) {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(600000);
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -56,8 +63,8 @@ public class HomeFrag extends Fragment {
             }
         };
         t.start();
-        AlertsActivity alerts = new AlertsActivity();
-//        intesnity deciding rules
+        //        intesnity deciding rules
+        int intensity = 28;
         if (intensity < 30) {
             intensity_result.setText(R.string.low);
             intensity_result.setBackgroundResource(R.color.low);

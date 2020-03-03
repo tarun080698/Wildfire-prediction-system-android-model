@@ -13,16 +13,16 @@ public class MyHelper extends SQLiteOpenHelper {
     private static final String dbname = "alerts.db";
     private static final int version = 1;
 
-    private static final String TABLE_NAME = "past_alerts";
-    private static final String COLUMN_ID = "id";
-    private static final String COLUMN_D_T = "date_time";
-    private static final String COLUMN_TEMP = "temperature";
-    private static final String COLUMN_HUMIDITY = "humidity";
-    private static final String COLUMN_SM = "soil_moisture";
-    private static final String COLUMN_ATM_P = "Atmospheric_pressure";
-    private static final String COLUMN_ALT = "Altitude";
-    private static final String COLUMN_INTENSITY_RES = "Intensity_result";
-    private static final String COLUMN_INTENSITY = "Intensity";
+    static final String TABLE_NAME = "past_alerts";
+    static final String COLUMN_ID = "id";
+    static final String COLUMN_D_T = "date_time";
+    static final String COLUMN_TEMP = "temperature";
+    static final String COLUMN_HUMIDITY = "humidity";
+    static final String COLUMN_SM = "soil_moisture";
+    static final String COLUMN_ATM_P = "Atmospheric_pressure";
+    static final String COLUMN_ALT = "Altitude";
+    static final String COLUMN_INTENSITY_RES = "Intensity_result";
+    static final String COLUMN_INTENSITY = "Intensity";
 
     MyHelper(Context context) {
         super(context, dbname, null, version);
@@ -42,7 +42,7 @@ public class MyHelper extends SQLiteOpenHelper {
                 COLUMN_INTENSITY + " REAL NOT NULL)";
         db.execSQL(sqlCreateTable);
 
-        insertData(33, 22, 22, 22, 22, "low", 22, db);
+        insertData(33, 22, 99, 22, 22, "low", 22, db);
     }
 
     void insertData(double temp, double humidity, double soil_moisture, double atm_p, double altitude, String iResult, double intensity, SQLiteDatabase db) {
@@ -50,8 +50,7 @@ public class MyHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         SimpleDateFormat sdf = new SimpleDateFormat("*yyyy-MM-dd hh:mm a", Locale.getDefault());
         String currentDateAndTime = sdf.format(new Date());
-//        String mDate ="2016-11-16";/*currentTime.toString();*/
-        values.put(COLUMN_D_T, currentDateAndTime/*mDate*/);
+        values.put(COLUMN_D_T, currentDateAndTime);
         values.put(COLUMN_TEMP, temp);
         values.put(COLUMN_HUMIDITY, humidity);
         values.put(COLUMN_SM, soil_moisture);

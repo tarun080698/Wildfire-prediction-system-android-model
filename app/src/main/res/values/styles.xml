@@ -25,7 +25,7 @@
     </style>
 
     <!--    vertical line-->
-    <style name="proifleDetailsView">
+    <style name="profileDetailsView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">3dp</item>
         <item name="android:background">#B3B1B1</item>
