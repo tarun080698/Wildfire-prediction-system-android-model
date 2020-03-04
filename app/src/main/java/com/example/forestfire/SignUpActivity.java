@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,12 +18,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ProgressBar progressBar;
     EditText editTextEmail, editTextPassword;
     ACProgressFlower dialog;
     private FirebaseAuth mAuth;
@@ -75,35 +75,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
-        String upperCaseChars = "(.*[A-Z].*)";
-        if (!password.matches(upperCaseChars)) {
-            //editTextPassword.setError("Password should contain atleast one upper case alphabet");
-            editTextPassword.setError("Password should contain at least one number, one lowercase letter, one uppercase letter, and one special character.");
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        String lowerCaseChars = "(.*[a-z].*)";
-        if (!password.matches(lowerCaseChars)) {
-            editTextPassword.setError("Password should contain at least one number, one lowercase letter, one uppercase letter, and one special character.");
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        String numbers = "(.*[0-9].*)";
-        if (!password.matches(numbers)) {
-            editTextPassword.setError("Password should contain at least one number, one lowercase letter, one uppercase letter, and one special character.");
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        String specialChars = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
-        if (!password.matches(specialChars)) {
-            editTextPassword.setError("Password should contain at least one number, one lowercase letter, one uppercase letter, and one special character.");
-            editTextPassword.requestFocus();
-            return;
-        }
-
         dialog.show();
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -111,10 +82,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 dialog.dismiss();
                 if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "User Registered Successfully", Toast.LENGTH_SHORT).show();
-                    /*Intent iLogin = new Intent(SignUpActivity.this, LoginActivity.class);
-                    iLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(iLogin);
-                    finish();*/
                     sendEmailVerification();
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
@@ -122,7 +89,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         Toast.makeText(getApplicationContext(), "You are already registered", Toast.LENGTH_SHORT).show();
                     } else {
                         editTextPassword.setText("");
-                        Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -141,7 +108,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         editTextEmail.setText("");
                         editTextPassword.setText("");
                     } else {
-                        Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

@@ -64,7 +64,7 @@ public class HomeFrag extends Fragment {
         };
         t.start();
         //        intesnity deciding rules
-        int intensity = 28;
+        int intensity = 55;
         if (intensity < 30) {
             intensity_result.setText(R.string.low);
             intensity_result.setBackgroundResource(R.color.low);

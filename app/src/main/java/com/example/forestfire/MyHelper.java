@@ -10,7 +10,7 @@ public class MyHelper extends SQLiteOpenHelper {
     private static final int version = 1;
 
     static final String TABLE_NAME = "past_alerts";
-    static final String COLUMN_ID = "_id";
+    private static final String COLUMN_ID = "_id";
     static final String COLUMN_D_T = "date_time";
     static final String COLUMN_TEMP = "temperature";
     static final String COLUMN_HUMIDITY = "humidity";

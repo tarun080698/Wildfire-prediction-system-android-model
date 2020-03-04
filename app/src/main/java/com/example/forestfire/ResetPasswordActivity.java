@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,16 +16,16 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
     EditText editTextEmail;
-    Button reset, back;
+    FirebaseAuth mAuth;
     ACProgressFlower dialog;
-    private FirebaseAuth mAuth;
-    private String mEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
 
     private void passReset() {
-        mEmail = editTextEmail.getText().toString().trim();
+        String mEmail = editTextEmail.getText().toString().trim();
         if (mEmail.isEmpty()) {
             editTextEmail.setError("Email is required");
             editTextEmail.requestFocus();
@@ -82,8 +81,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     Toast.makeText(ResetPasswordActivity.this, "Password reset link sent to your email. Please check your email inbox.", Toast.LENGTH_SHORT).show();
                 } else {
                     dialog.dismiss();
-                    Toast.makeText(ResetPasswordActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    return;
+                    Toast.makeText(ResetPasswordActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -93,7 +91,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         dialog.dismiss();
                         Toast.makeText(ResetPasswordActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        return;
                     }
                 });
     }

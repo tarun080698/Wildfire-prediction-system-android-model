@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
@@ -100,35 +102,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        String upperCaseChars = "(.*[A-Z].*)";
-        if (!password.matches(upperCaseChars)) {
-            //pass.setError("Password should contain atleast one upper case alphabet");
-            pass.setError("Password should contain at least one number, one lowercase letter, one uppercase letter, and one special character.");
-            pass.requestFocus();
-            return;
-        }
-
-        String lowerCaseChars = "(.*[a-z].*)";
-        if (!password.matches(lowerCaseChars)) {
-            pass.setError("Password should contain at least one number, one lowercase letter, one uppercase letter, and one special character.");
-            pass.requestFocus();
-            return;
-        }
-
-        String numbers = "(.*[0-9].*)";
-        if (!password.matches(numbers)) {
-            pass.setError("Password should contain at least one number, one lowercase letter, one uppercase letter, and one special character.");
-            pass.requestFocus();
-            return;
-        }
-
-        String specialChars = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
-        if (!password.matches(specialChars)) {
-            pass.setError("Password should contain at least one number, one lowercase letter, one uppercase letter, and one special character.");
-            pass.requestFocus();
-            return;
-        }
-
         dialog.show();
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -136,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 dialog.dismiss();
                 if (task.isSuccessful()) {
-                    if (mAuth.getCurrentUser().isEmailVerified()) {
+                    if (Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()) {
                         finish();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -149,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

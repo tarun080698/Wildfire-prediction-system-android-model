@@ -12,10 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ProfileData extends AppCompatActivity {
 
-    private static final String[] STATES = new String[]{
-            "Maharashtra", "Uttar Pradesh", "Rajasthan", "Punjab"
-    };
-    private static String TAG = ProfileData.class.getSimpleName();
     AutoCompleteTextView city, state, country;
     EditText name, phone, occuptn, plotNo, lane, pin, locality;
 

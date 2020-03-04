@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,11 +40,15 @@ public class AlertsActivity extends AppCompatActivity {
 
         helper = new MyHelper(this);
         databaseWrite = helper.getWritableDatabase();
-        SQLiteDatabase databaseRead = helper.getReadableDatabase();
+//        SQLiteDatabase databaseRead = helper.getReadableDatabase();
 
         recyclerView = findViewById(R.id.logs_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        itemAnimator.setAddDuration(500);
+        recyclerView.setItemAnimator(itemAnimator);
         layoutManager.setReverseLayout(true);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         alertAdapter = new MyAlertAdapter(this, getAllItems());
