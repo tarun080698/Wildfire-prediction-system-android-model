@@ -41,24 +41,6 @@ public class MyHelper extends SQLiteOpenHelper {
 
     }
 
-//    void insertData(double temp, double humidity, double soil_moisture, double atm_p, double altitude, String iResult, double intensity, SQLiteDatabase db) {
-//
-//        ContentValues values = new ContentValues();
-//        SimpleDateFormat sdf = new SimpleDateFormat("*yyyy-MM-dd hh:mm a", Locale.getDefault());
-//        String currentDateAndTime = sdf.format(new Date());
-//        values.put(COLUMN_D_T, currentDateAndTime);
-//        values.put(COLUMN_TEMP, temp);
-//        values.put(COLUMN_HUMIDITY, humidity);
-//        values.put(COLUMN_SM, soil_moisture);
-//        values.put(COLUMN_ATM_P, atm_p);
-//        values.put(COLUMN_ALT, altitude);
-//        values.put(COLUMN_INTENSITY_RES, iResult);
-//        values.put(COLUMN_INTENSITY, intensity);
-//
-//        db.insert("past_alerts", null, values);
-//
-//    }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
