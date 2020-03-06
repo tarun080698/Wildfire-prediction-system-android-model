@@ -18,6 +18,8 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,11 +47,27 @@ public class HomeFrag extends Fragment {
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private SQLiteDatabase databaseWrite;
+    public static TextView data;
+    Button b1;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.frag_home, container, false);
+
+        final ProgressBar progressBar = v.findViewById(R.id.progressBar);
+
+
+        //SensorData to & from firebase
+        data = v.findViewById(R.id.dataJson);
+        b1 = v.findViewById(R.id.button);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UploadDataJson uploadDataJson = new UploadDataJson();
+                uploadDataJson.execute();
+            }
+        });
 
         final TextView intensity_result = v.findViewById(R.id.intensity);
         final TextView dateTime = v.findViewById(R.id.dateAndTime);
@@ -77,26 +95,46 @@ public class HomeFrag extends Fragment {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
+//                                TextView temp = v.findViewById(R.id.temp);
+//                                TextView hum = v.findViewById(R.id.humidity);
+//                                TextView sMoist = v.findViewById(R.id.soil_moist);
+//                                TextView atmP = v.findViewById(R.id.atm);
+//                                TextView alt = v.findViewById(R.id.alt);
+//                                String te = temp.getText().toString();
+//                                final double t = Double.parseDouble(te);
+//                                String hu = hum.getText().toString();
+//                                final double h = Double.parseDouble(hu);
+//                                String sm = sMoist.getText().toString();
+//                                final double s = Double.parseDouble(sm);
+//                                String ap = atmP.getText().toString();
+//                                final double atm = Double.parseDouble(ap);
+//                                String al = alt.getText().toString();
+//                                final double a = Double.parseDouble(al);
                                 SimpleDateFormat sdf = new SimpleDateFormat("*yyyy-MM-dd hh:mm a", Locale.getDefault());
                                 String currentDateAndTime = sdf.format(new Date());
                                 dateTime.setText(currentDateAndTime);
                                 Random random = new Random();
-                                int intensity = random.nextInt(100 - 1) + 1;
+                                int intensity = 23;
+//                                        random.nextInt(100 - 1) + 1;
                                 if (intensity <= 25) {
                                     intensity_result.setText(R.string.low);
                                     intensity_result.setBackgroundResource(R.color.low);
+                                    progressBar.setVisibility(View.GONE);
                                 } else if (intensity > 25 && intensity <= 60) {
                                     intensity_result.setText(R.string.med);
                                     intensity_result.setBackgroundResource(R.color.medium);
+                                    progressBar.setVisibility(View.GONE);
                                 } else if (intensity > 60 && intensity <= 75) {
                                     intensity_result.setText(R.string.hig);
                                     intensity_result.setBackgroundResource(R.color.high);
-                                    insertData(33, 22, 99, 22, 22, "High", 22, databaseWrite);
+                                    insertData(28, 18, 1000, 96527.7, 1335, "High", 22, databaseWrite);
+                                    progressBar.setVisibility(View.GONE);
                                     simpleNotification(v);
                                 } else if (intensity > 75) {
                                     intensity_result.setText(R.string.vhigh);
                                     intensity_result.setBackgroundResource(R.color.very_high);
-                                    insertData(33, 22, 99, 22, 22, "Very High", 22, databaseWrite);
+                                    insertData(28, 18, 1000, 96527.7, 1335, "Very High", 22, databaseWrite);
+                                    progressBar.setVisibility(View.GONE);
                                     simpleNotification(v);
                                 }
                             }
