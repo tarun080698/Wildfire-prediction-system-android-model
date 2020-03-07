@@ -107,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="1000% h2o/w"
+                    android:text="1000% Vol"
                     android:textColor="@color/black"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -192,6 +192,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:text="please wait..."
                     android:textColor="@color/black"
                     android:textSize="32sp"
                     android:textStyle="bold" />
@@ -201,7 +202,7 @@
                     style="?android:attr/progressBarStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
             </LinearLayout>
 
             <TextView
@@ -210,7 +211,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="end"
-                android:text="Click here to view past alerts"
+                android:text="Click here to view past alerts-->"
                 android:textColor="@color/medium"
                 android:textSize="22sp" />
 

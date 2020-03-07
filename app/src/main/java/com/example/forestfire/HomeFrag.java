@@ -110,6 +110,7 @@ public class HomeFrag extends Fragment {
 //                                final double atm = Double.parseDouble(ap);
 //                                String al = alt.getText().toString();
 //                                final double a = Double.parseDouble(al);
+                                progressBar.setVisibility(View.VISIBLE);
                                 SimpleDateFormat sdf = new SimpleDateFormat("*yyyy-MM-dd hh:mm a", Locale.getDefault());
                                 String currentDateAndTime = sdf.format(new Date());
                                 dateTime.setText(currentDateAndTime);
