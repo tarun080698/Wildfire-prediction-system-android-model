@@ -34,10 +34,11 @@ public class UploadDataJson extends AsyncTask<Void, Void, Void> {
             }
             JSONObject jsonObject = new JSONObject(data);
             JSONArray jsonArray = jsonObject.getJSONArray("data");
+            data = jsonArray.toString().trim();
 //            singleParsed = jsonArray.get(0).toString();
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject JO = (JSONObject) jsonArray.get(i);
-//                singleParsed = JO.getString(get(0));
+                JSONObject JA = (JSONObject) jsonArray.get(i);
+//                singleParsed = JA.get(i);
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -53,7 +54,7 @@ public class UploadDataJson extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        HomeFrag.data.setText(this.singleParsed);
+        HomeFrag.data.setText(this.data);
     }
 
 }
