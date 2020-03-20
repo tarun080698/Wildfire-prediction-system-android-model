@@ -17,8 +17,7 @@ import java.net.URL;
 public class UploadDataJson extends AsyncTask<Void, Void, Void> {
 
     private String data = "";
-    private String dataParsed = "";
-    private String singleParsed = "";
+    private String singleParsed, date_time, temp, alt, humi, sm, atm;
 
     @Override
     protected Void doInBackground(Void... voids) {
@@ -30,16 +29,19 @@ public class UploadDataJson extends AsyncTask<Void, Void, Void> {
             String line = "";
             while (line != null) {
                 line = bufferedReader.readLine();
-                data = data + line;
+                data += line;
             }
             JSONObject jsonObject = new JSONObject(data);
             JSONArray jsonArray = jsonObject.getJSONArray("data");
-            data = jsonArray.toString().trim();
-//            singleParsed = jsonArray.get(0).toString();
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject JA = (JSONObject) jsonArray.get(i);
-//                singleParsed = JA.get(i);
-            }
+            singleParsed = jsonArray.get(0).toString();
+//            dataParsed = singleParsed.substring(22,24);
+            date_time = "Date and Time(Last alert):-  \n" + singleParsed.substring(2, 21);
+            temp = singleParsed.substring(24, 29) + "° C";
+            humi = singleParsed.substring(32, 37) + "%";
+            sm = singleParsed.substring(40, 44) + "% Vol";
+            alt = singleParsed.substring(47, 54) + " feet";
+            atm = singleParsed.substring(57, 65) + " pa";
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -54,7 +56,12 @@ public class UploadDataJson extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        HomeFrag.data.setText(this.data);
+        HomeFrag.dateTime.setText(this.date_time);
+        HomeFrag.temperature.setText(this.temp);
+        HomeFrag.humidity.setText(this.humi);
+        HomeFrag.soil_moisture.setText(this.sm);
+        HomeFrag.atm_p.setText(this.atm);
+        HomeFrag.altitude.setText(this.alt);
     }
 
 }

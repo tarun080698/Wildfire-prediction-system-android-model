@@ -17,17 +17,36 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/dateAndTime"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:gravity="end"
-                android:paddingEnd="15dp"
-                android:text="Date and Time"
-                android:textColor="@color/orange"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:gravity="start"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/dateAndTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Date and Time"
+                    android:textColor="@color/orange"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <View style="@style/profileDetailsView" />
+
+                <TextView
+                    android:id="@+id/dateAndTimeCurrent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Current Date and Time"
+                    android:textColor="@color/orange"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,11 +65,11 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/temp"
+                    android:id="@+id/tempCurrent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="28° C"
+                    android:text="00"
                     android:textColor="@color/black"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -75,11 +94,11 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/humidity"
+                    android:id="@+id/humiCurrent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="18%"
+                    android:text="00"
                     android:textColor="@color/black"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -103,11 +122,11 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/soil_moist"
+                    android:id="@+id/soil_moistCurrent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="1000% Vol"
+                    android:text="00"
                     android:textColor="@color/black"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -131,11 +150,11 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/atm"
+                    android:id="@+id/atmCurrent"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="12dp"
-                    android:text="96527.7 pa"
+                    android:text="00"
                     android:textColor="@color/black"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -159,11 +178,11 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/alt"
+                    android:id="@+id/altCurrent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="1335 feet"
+                    android:text="00"
                     android:textColor="@color/black"
                     android:textSize="24sp" />
 
@@ -215,23 +234,12 @@
                 android:textColor="@color/medium"
                 android:textSize="22sp" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button"
-                android:visibility="visible" />
+            <!--            <Button-->
+            <!--                android:id="@+id/button"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="Button"-->
+            <!--                android:visibility="visible" />-->
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/dataJson"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="api output in json"
-            android:visibility="visible" />
-
-
     </androidx.cardview.widget.CardView>
-
-
 </ScrollView>

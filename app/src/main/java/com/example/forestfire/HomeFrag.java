@@ -47,7 +47,7 @@ public class HomeFrag extends Fragment {
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private SQLiteDatabase databaseWrite;
-    public static TextView data;
+    public static TextView dateTime, dateTimeCurrent, data, temperature, humidity, soil_moisture, atm_p, altitude;
     Button b1;
 
     @Nullable
@@ -59,22 +59,30 @@ public class HomeFrag extends Fragment {
 
 
         //SensorData to & from firebase
-        data = v.findViewById(R.id.dataJson);
-        b1 = v.findViewById(R.id.button);
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                UploadDataJson uploadDataJson = new UploadDataJson();
-                uploadDataJson.execute();
-            }
-        });
+//        data = v.findViewById(R.id.dataJson);
+//        b1 = v.findViewById(R.id.button);
+//        b1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                UploadDataJson uploadDataJson = new UploadDataJson();
+//                uploadDataJson.execute();
+//            }
+//        });
 
+        //getting views of sensors text
+        temperature = v.findViewById(R.id.tempCurrent);
+        humidity = v.findViewById(R.id.humiCurrent);
+        soil_moisture = v.findViewById(R.id.soil_moistCurrent);
+        atm_p = v.findViewById(R.id.atmCurrent);
+        altitude = v.findViewById(R.id.altCurrent);
         final TextView intensity_result = v.findViewById(R.id.intensity);
-        final TextView dateTime = v.findViewById(R.id.dateAndTime);
+        dateTime = v.findViewById(R.id.dateAndTime);
+        dateTimeCurrent = v.findViewById(R.id.dateAndTimeCurrent);
+
+        //sending alerts to database
         TextView alertsOpen = v.findViewById(R.id.open_alerts);
         MyHelper helper = new MyHelper(getActivity());
         databaseWrite = helper.getWritableDatabase();
-
         alertsOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,40 +91,41 @@ public class HomeFrag extends Fragment {
         });
 
         SimpleDateFormat sdf = new SimpleDateFormat("*yyyy-MM-dd hh:mm a", Locale.getDefault());
-        String currentDateAndTime = sdf.format(new Date());
-        dateTime.setText(currentDateAndTime);
+        String currentDateAndTime = "Date and Time(present):-  \n" + sdf.format(new Date());
+        dateTimeCurrent.setText(currentDateAndTime);
 
         Thread t = new Thread() {
             @Override
             public void run() {
                 while (!isInterrupted()) {
                     try {
-                        Thread.sleep(60000);
+                        Thread.sleep(10000);
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
-//                                TextView temp = v.findViewById(R.id.temp);
-//                                TextView hum = v.findViewById(R.id.humidity);
-//                                TextView sMoist = v.findViewById(R.id.soil_moist);
-//                                TextView atmP = v.findViewById(R.id.atm);
-//                                TextView alt = v.findViewById(R.id.alt);
-//                                String te = temp.getText().toString();
-//                                final double t = Double.parseDouble(te);
-//                                String hu = hum.getText().toString();
-//                                final double h = Double.parseDouble(hu);
-//                                String sm = sMoist.getText().toString();
-//                                final double s = Double.parseDouble(sm);
-//                                String ap = atmP.getText().toString();
-//                                final double atm = Double.parseDouble(ap);
-//                                String al = alt.getText().toString();
-//                                final double a = Double.parseDouble(al);
                                 progressBar.setVisibility(View.VISIBLE);
+                                //getting vales of current params of sensors
+
+                                //date to be changed
                                 SimpleDateFormat sdf = new SimpleDateFormat("*yyyy-MM-dd hh:mm a", Locale.getDefault());
-                                String currentDateAndTime = sdf.format(new Date());
-                                dateTime.setText(currentDateAndTime);
+                                String currentDateAndTime = "Date and Time(present):- \n" + sdf.format(new Date());
+                                dateTimeCurrent.setText(currentDateAndTime);
+
+                                //function call to fetch data or sensor from api
+                                UploadDataJson uploadDataJson = new UploadDataJson();
+                                uploadDataJson.execute();
+
+                                //getting the intesity generated
                                 Random random = new Random();
-                                int intensity = 23;
-//                                        random.nextInt(100 - 1) + 1;
+                                int intensity = random.nextInt(100 - 1) + 1;
+
+                                String dtL = dateTime.getText().toString().trim();
+                                String te = temperature.getText().toString();
+                                String h = humidity.getText().toString();
+                                String s = soil_moisture.getText().toString();
+                                String ap = atm_p.getText().toString();
+                                String al = altitude.getText().toString();
+                                //checking of intensity for alert
                                 if (intensity <= 25) {
                                     intensity_result.setText(R.string.low);
                                     intensity_result.setBackgroundResource(R.color.low);
@@ -128,13 +137,13 @@ public class HomeFrag extends Fragment {
                                 } else if (intensity > 60 && intensity <= 75) {
                                     intensity_result.setText(R.string.hig);
                                     intensity_result.setBackgroundResource(R.color.high);
-                                    insertData(28, 18, 1000, 96527.7, 1335, "High", 22, databaseWrite);
+                                    insertData(dtL, te, h, s, ap, al, "High", "22", databaseWrite);
                                     progressBar.setVisibility(View.GONE);
                                     simpleNotification(v);
                                 } else if (intensity > 75) {
                                     intensity_result.setText(R.string.vhigh);
                                     intensity_result.setBackgroundResource(R.color.very_high);
-                                    insertData(28, 18, 1000, 96527.7, 1335, "Very High", 22, databaseWrite);
+                                    insertData(dtL, te, h, s, ap, al, "Very High", "22", databaseWrite);
                                     progressBar.setVisibility(View.GONE);
                                     simpleNotification(v);
                                 }
@@ -150,12 +159,10 @@ public class HomeFrag extends Fragment {
         return v;
     }
 
-    private void insertData(double temp, double humidity, double soil_moisture, double atm_p, double altitude, String iResult, double intensity, SQLiteDatabase db) {
+    private void insertData(String dt, String temp, String humidity, String soil_moisture, String atm_p, String altitude, String iResult, String intensity, SQLiteDatabase db) {
 
         ContentValues values = new ContentValues();
-        SimpleDateFormat sdf = new SimpleDateFormat("*yyyy-MM-dd hh:mm a", Locale.getDefault());
-        String currentDateAndTime = sdf.format(new Date());
-        values.put(COLUMN_D_T, currentDateAndTime);
+        values.put(COLUMN_D_T, dt);
         values.put(COLUMN_TEMP, temp);
         values.put(COLUMN_HUMIDITY, humidity);
         values.put(COLUMN_SM, soil_moisture);

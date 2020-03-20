@@ -30,13 +30,13 @@ public class MyHelper extends SQLiteOpenHelper {
         String sqlCreateTable = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 COLUMN_D_T + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
-                COLUMN_TEMP + " REAL NOT NULL," +
-                COLUMN_HUMIDITY + " REAL NOT NULL," +
-                COLUMN_SM + " REAL NOT NULL," +
-                COLUMN_ATM_P + " REAL NOT NULL," +
-                COLUMN_ALT + " REAL NOT NULL," +
+                COLUMN_TEMP + " TEXT NOT NULL," +
+                COLUMN_HUMIDITY + " TEXT NOT NULL," +
+                COLUMN_SM + " TEXT NOT NULL," +
+                COLUMN_ATM_P + " TEXT NOT NULL," +
+                COLUMN_ALT + " TEXT NOT NULL," +
                 COLUMN_INTENSITY_RES + " TEXT NOT NULL," +
-                COLUMN_INTENSITY + " REAL NOT NULL)";
+                COLUMN_INTENSITY + " TEXT NOT NULL)";
         db.execSQL(sqlCreateTable);
 
     }
