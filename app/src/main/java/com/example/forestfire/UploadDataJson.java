@@ -35,7 +35,7 @@ public class UploadDataJson extends AsyncTask<Void, Void, Void> {
             JSONArray jsonArray = jsonObject.getJSONArray("data");
             singleParsed = jsonArray.get(0).toString();
 //            dataParsed = singleParsed.substring(22,24);
-            date_time = "Date and Time(Last alert):-  \n" + singleParsed.substring(2, 21);
+            date_time = "Date and Time(Last alert):-\n" + singleParsed.substring(2, 21);
             temp = singleParsed.substring(24, 29) + "° C";
             humi = singleParsed.substring(32, 37) + "%";
             sm = singleParsed.substring(40, 44) + "% Vol";

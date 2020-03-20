@@ -47,7 +47,7 @@ public class HomeFrag extends Fragment {
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private SQLiteDatabase databaseWrite;
-    public static TextView dateTime, dateTimeCurrent, data, temperature, humidity, soil_moisture, atm_p, altitude;
+    public static TextView dateTime, dateTimeCurrent, temperature, humidity, soil_moisture, atm_p, altitude;
     Button b1;
 
     @Nullable
@@ -57,17 +57,6 @@ public class HomeFrag extends Fragment {
 
         final ProgressBar progressBar = v.findViewById(R.id.progressBar);
 
-
-        //SensorData to & from firebase
-//        data = v.findViewById(R.id.dataJson);
-//        b1 = v.findViewById(R.id.button);
-//        b1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                UploadDataJson uploadDataJson = new UploadDataJson();
-//                uploadDataJson.execute();
-//            }
-//        });
 
         //getting views of sensors text
         temperature = v.findViewById(R.id.tempCurrent);
@@ -99,7 +88,7 @@ public class HomeFrag extends Fragment {
             public void run() {
                 while (!isInterrupted()) {
                     try {
-                        Thread.sleep(10000);
+                        Thread.sleep(600000);
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -119,7 +108,7 @@ public class HomeFrag extends Fragment {
                                 Random random = new Random();
                                 int intensity = random.nextInt(100 - 1) + 1;
 
-                                String dtL = dateTime.getText().toString().trim();
+                                String dtL = dateTime.getText().toString();
                                 String te = temperature.getText().toString();
                                 String h = humidity.getText().toString();
                                 String s = soil_moisture.getText().toString();

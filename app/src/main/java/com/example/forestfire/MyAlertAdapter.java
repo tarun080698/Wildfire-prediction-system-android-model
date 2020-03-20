@@ -88,6 +88,7 @@ public class MyAlertAdapter extends RecyclerView.Adapter<MyAlertAdapter.AlertVie
             alt = itemView.findViewById(R.id.alt);
             atm = itemView.findViewById(R.id.atm);
             result = itemView.findViewById(R.id.results);
+
         }
     }
 }
