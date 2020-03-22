@@ -30,7 +30,7 @@ public class AlertsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.logs_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
-        layoutManager.setReverseLayout(false);
+        layoutManager.setReverseLayout(true);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);

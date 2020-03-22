@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
         login = findViewById(R.id.btn_lgn);
-        signup = findViewById(R.id.btn_signup);
+        signup = findViewById(R.id.btn_sign_up);
         forget_pass = findViewById(R.id.btn_forgotPass);
 //        https://github.com/Cloudist/ACProgressLite
         dialog = new ACProgressFlower.Builder(LoginActivity.this)

@@ -30,7 +30,7 @@ public class FeedbackFrag extends Fragment implements View.OnClickListener {
 
         assert container != null;
         Email = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
-        mEditTextMessage = v.findViewById(R.id.feeback_mesage);
+        mEditTextMessage = v.findViewById(R.id.feedback_message);
 
         Button bSend = v.findViewById(R.id.btn_send);
         bSend.setOnClickListener(this);

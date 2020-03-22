@@ -3,37 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="20dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#DD9E2525"
-        android:text="Message:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:paddingStart="15sp"
+        android:paddingEnd="0dp"
+        android:text="@string/message"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
 
     <EditText
-        android:id="@+id/feeback_mesage"
+        android:id="@+id/feedback_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
+        android:autofillHints=""
         android:gravity="start|top"
-        android:lines="10"
+        android:hint="@string/describe_the_problems_you_are_facing"
+        android:inputType=""
+        android:lines="5"
         android:textColor="@color/black"
         android:textColorHint="#838080"
         android:textSize="20sp" />
 
     <Button
         android:id="@+id/btn_send"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:background="@drawable/buttonstyle"
-        android:drawableEnd="@drawable/ic_send_black_24dp"
-        android:text="SEND"
-        android:textSize="20sp" />
+        android:background="#DD9E2525"
+        android:drawableEnd="@drawable/ic_send_white_24dp"
+        android:gravity="center"
+        android:text="@string/send"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
 
 </LinearLayout>

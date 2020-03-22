@@ -42,7 +42,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Temperature: "
+                android:text="@string/temperature_in_db"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -58,7 +58,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" ° C"
+                android:text="@string/temp_unit_c"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
         </LinearLayout>
@@ -77,7 +77,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Humidity: "
+                android:text="@string/humidity_in_db"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -86,14 +86,14 @@
                 android:id="@+id/humidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="18%"
+                android:text="18"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="%"
+                android:text="@string/humidity_unit"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
         </LinearLayout>
@@ -112,7 +112,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Soil Miosture: "
+                android:text="@string/soil_moisture_in_db"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -128,7 +128,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="% h2o/w"
+                android:text="@string/sm_unit_w"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
         </LinearLayout>
@@ -147,7 +147,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Atmospheric Pressure: "
+                android:text="@string/atmospheric_pressure_in_db"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -163,7 +163,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text=" pa"
+                android:text="@string/atm_press_unit_pa"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
         </LinearLayout>
@@ -182,7 +182,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Altitude: "
+                android:text="@string/altitude_in_db"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -198,7 +198,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="feet"
+                android:text="@string/alt_unit_feet"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
         </LinearLayout>
@@ -218,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Intensity--->"
+                android:text="@string/intensity_in_database"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -229,7 +229,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="high"
+                android:text="@string/high"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="32sp"

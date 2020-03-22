@@ -44,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 .fadeColor(Color.DKGRAY).build();
 
         mAuth = FirebaseAuth.getInstance();
-        findViewById(R.id.btn_signup).setOnClickListener(this);
+        findViewById(R.id.btn_sign_up).setOnClickListener(this);
         findViewById(R.id.btn_lgn).setOnClickListener(this);
     }
 
@@ -119,7 +119,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
 
-            case R.id.btn_signup:
+            case R.id.btn_sign_up:
                 registerUser();
                 break;
 

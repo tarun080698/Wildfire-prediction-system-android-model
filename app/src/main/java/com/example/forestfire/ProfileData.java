@@ -29,7 +29,7 @@ public class ProfileData extends AppCompatActivity {
         plotNo = findViewById(R.id.plot_no);
         lane = findViewById(R.id.lane);
         locality = findViewById(R.id.locality);
-        pin = findViewById(R.id.user_pincode);
+        pin = findViewById(R.id.user_pin_code);
 
         String uName = name.getText().toString();
         String uPhone = phone.getText().toString();

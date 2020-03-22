@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:background="#DEDFDF"
     android:layout_height="match_parent"
+    android:background="#DEDFDF"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity"
     tools:openDrawer="start">
@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Forest Fire"
+                android:text="@string/forest_fire"
                 android:textColor="@color/back_color"
                 android:textSize="25sp"
                 android:textStyle="bold" />

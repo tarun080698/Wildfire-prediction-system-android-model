@@ -33,6 +33,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
 
+import static android.view.View.VISIBLE;
 import static com.example.forestfire.MyHelper.COLUMN_ALT;
 import static com.example.forestfire.MyHelper.COLUMN_ATM_P;
 import static com.example.forestfire.MyHelper.COLUMN_D_T;
@@ -60,7 +61,7 @@ public class HomeFrag extends Fragment {
 
         //getting views of sensors text
         temperature = v.findViewById(R.id.tempCurrent);
-        humidity = v.findViewById(R.id.humiCurrent);
+        humidity = v.findViewById(R.id.hum_current);
         soil_moisture = v.findViewById(R.id.soil_moistCurrent);
         atm_p = v.findViewById(R.id.atmCurrent);
         altitude = v.findViewById(R.id.altCurrent);
@@ -92,45 +93,50 @@ public class HomeFrag extends Fragment {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                progressBar.setVisibility(View.VISIBLE);
-                                //getting vales of current params of sensors
+                                progressBar.setVisibility(VISIBLE);
+
+                                //function call to fetch data or sensor from api
+                                UploadDataJson uploadDataJson = new UploadDataJson();
+                                uploadDataJson.execute();
 
                                 //date to be changed
                                 SimpleDateFormat sdf = new SimpleDateFormat("*yyyy-MM-dd hh:mm a", Locale.getDefault());
                                 String currentDateAndTime = "Date and Time(present):- \n" + sdf.format(new Date());
                                 dateTimeCurrent.setText(currentDateAndTime);
 
-                                //function call to fetch data or sensor from api
-                                UploadDataJson uploadDataJson = new UploadDataJson();
-                                uploadDataJson.execute();
-
-                                //getting the intesity generated
+                                //getting the intensity generated
                                 Random random = new Random();
                                 int intensity = random.nextInt(100 - 1) + 1;
 
+                                //getting vales of current params of sensors
                                 String dtL = dateTime.getText().toString();
                                 String te = temperature.getText().toString();
                                 String h = humidity.getText().toString();
                                 String s = soil_moisture.getText().toString();
                                 String ap = atm_p.getText().toString();
                                 String al = altitude.getText().toString();
+
                                 //checking of intensity for alert
                                 if (intensity <= 25) {
+                                    intensity_result.setVisibility(VISIBLE);
                                     intensity_result.setText(R.string.low);
                                     intensity_result.setBackgroundResource(R.color.low);
                                     progressBar.setVisibility(View.GONE);
                                 } else if (intensity > 25 && intensity <= 60) {
+                                    intensity_result.setVisibility(VISIBLE);
                                     intensity_result.setText(R.string.med);
                                     intensity_result.setBackgroundResource(R.color.medium);
                                     progressBar.setVisibility(View.GONE);
                                 } else if (intensity > 60 && intensity <= 75) {
+                                    intensity_result.setVisibility(VISIBLE);
                                     intensity_result.setText(R.string.hig);
                                     intensity_result.setBackgroundResource(R.color.high);
                                     insertData(dtL, te, h, s, ap, al, "High", "22", databaseWrite);
                                     progressBar.setVisibility(View.GONE);
                                     simpleNotification(v);
                                 } else if (intensity > 75) {
-                                    intensity_result.setText(R.string.vhigh);
+                                    intensity_result.setVisibility(VISIBLE);
+                                    intensity_result.setText(R.string.very_high);
                                     intensity_result.setBackgroundResource(R.color.very_high);
                                     insertData(dtL, te, h, s, ap, al, "Very High", "22", databaseWrite);
                                     progressBar.setVisibility(View.GONE);
