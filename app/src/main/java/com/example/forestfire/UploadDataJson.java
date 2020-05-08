@@ -34,13 +34,21 @@ public class UploadDataJson extends AsyncTask<Void, Void, Void> {
             JSONObject jsonObject = new JSONObject(data);
             JSONArray jsonArray = jsonObject.getJSONArray("data");
             singleParsed = jsonArray.get(0).toString();
-//            dataParsed = singleParsed.substring(22,24);
-            date_time = "Date and Time(Last alert):-\n" + singleParsed.substring(2, 21);
-            temp = singleParsed.substring(24, 29) + "° C";
-            humi = singleParsed.substring(32, 37) + "%";
-            sm = singleParsed.substring(40, 44) + "% Vol";
-            alt = singleParsed.substring(47, 54) + " feet";
-            atm = singleParsed.substring(57, 65) + " pa";
+            if (jsonArray.get(0).toString().isEmpty()) {
+                date_time = "Date and Time:-   Unavailable";
+                temp = "";
+                humi = "";
+                sm = "";
+                alt = "";
+                atm = "";
+            } else {
+                date_time = "Date and Time(Last alert):-\n" + singleParsed.substring(2, 21);
+                temp = singleParsed.substring(24, 29) + "° C";
+                humi = singleParsed.substring(32, 37) + "%";
+                sm = singleParsed.substring(40, 44) + "% Vol";
+                alt = singleParsed.substring(47, 54) + " feet";
+                atm = singleParsed.substring(57, 65) + " pa";
+            }
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

@@ -83,13 +83,14 @@ public class HomeFrag extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat("*yyyy-MM-dd hh:mm a", Locale.getDefault());
         String currentDateAndTime = "Date and Time(present):-  \n" + sdf.format(new Date());
         dateTimeCurrent.setText(currentDateAndTime);
+        dateTime.setText("Date and Time(Last):-  Unavailable");
 
         Thread t = new Thread() {
             @Override
             public void run() {
                 while (!isInterrupted()) {
                     try {
-                        Thread.sleep(600000);
+                        Thread.sleep(30000);
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -104,10 +105,6 @@ public class HomeFrag extends Fragment {
                                 String currentDateAndTime = "Date and Time(present):- \n" + sdf.format(new Date());
                                 dateTimeCurrent.setText(currentDateAndTime);
 
-                                //getting the intensity generated
-                                Random random = new Random();
-                                int intensity = random.nextInt(100 - 1) + 1;
-
                                 //getting vales of current params of sensors
                                 String dtL = dateTime.getText().toString();
                                 String te = temperature.getText().toString();
@@ -115,32 +112,45 @@ public class HomeFrag extends Fragment {
                                 String s = soil_moisture.getText().toString();
                                 String ap = atm_p.getText().toString();
                                 String al = altitude.getText().toString();
+//                                te.isEmpty() || h.isEmpty() || s.isEmpty() || ap.isEmpty() || al.isEmpty())
+                                if (te.isEmpty() || te.equals("")) {
+                                    //checking of intensity for alert
 
-                                //checking of intensity for alert
-                                if (intensity <= 25) {
+//                                    dateTime.setText("Date and Time:-   Unavailable");
                                     intensity_result.setVisibility(VISIBLE);
-                                    intensity_result.setText(R.string.low);
-                                    intensity_result.setBackgroundResource(R.color.low);
+                                    intensity_result.setText("Some error occured.");
+                                    intensity_result.setTextColor(Color.RED);
                                     progressBar.setVisibility(View.GONE);
-                                } else if (intensity > 25 && intensity <= 60) {
-                                    intensity_result.setVisibility(VISIBLE);
-                                    intensity_result.setText(R.string.med);
-                                    intensity_result.setBackgroundResource(R.color.medium);
-                                    progressBar.setVisibility(View.GONE);
-                                } else if (intensity > 60 && intensity <= 75) {
-                                    intensity_result.setVisibility(VISIBLE);
-                                    intensity_result.setText(R.string.hig);
-                                    intensity_result.setBackgroundResource(R.color.high);
-                                    insertData(dtL, te, h, s, ap, al, "High", "22", databaseWrite);
-                                    progressBar.setVisibility(View.GONE);
-                                    simpleNotification(v);
-                                } else if (intensity > 75) {
-                                    intensity_result.setVisibility(VISIBLE);
-                                    intensity_result.setText(R.string.very_high);
-                                    intensity_result.setBackgroundResource(R.color.very_high);
-                                    insertData(dtL, te, h, s, ap, al, "Very High", "22", databaseWrite);
-                                    progressBar.setVisibility(View.GONE);
-                                    simpleNotification(v);
+
+                                } else {
+                                    //getting the intensity generated
+                                    Random random = new Random();
+                                    int intensity = random.nextInt(100 - 1) + 1;
+                                    if (intensity <= 25) {
+                                        intensity_result.setVisibility(VISIBLE);
+                                        intensity_result.setText(R.string.low);
+                                        intensity_result.setBackgroundResource(R.color.low);
+                                        progressBar.setVisibility(View.GONE);
+                                    } else if (intensity > 25 && intensity <= 60) {
+                                        intensity_result.setVisibility(VISIBLE);
+                                        intensity_result.setText(R.string.med);
+                                        intensity_result.setBackgroundResource(R.color.medium);
+                                        progressBar.setVisibility(View.GONE);
+                                    } else if (intensity > 60 && intensity <= 75) {
+                                        intensity_result.setVisibility(VISIBLE);
+                                        intensity_result.setText(R.string.hig);
+                                        intensity_result.setBackgroundResource(R.color.high);
+                                        insertData(dtL, te, h, s, ap, al, "High", "22", databaseWrite);
+                                        progressBar.setVisibility(View.GONE);
+                                        simpleNotification(v);
+                                    } else if (intensity > 75) {
+                                        intensity_result.setVisibility(VISIBLE);
+                                        intensity_result.setText(R.string.very_high);
+                                        intensity_result.setBackgroundResource(R.color.very_high);
+                                        insertData(dtL, te, h, s, ap, al, "Very High", "22", databaseWrite);
+                                        progressBar.setVisibility(View.GONE);
+                                        simpleNotification(v);
+                                    }
                                 }
                             }
                         });
